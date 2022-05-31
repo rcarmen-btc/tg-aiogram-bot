@@ -10,6 +10,8 @@ from tgbot.filters.admin import AdminFilter
 from tgbot.handlers.admin import register_admin
 from tgbot.handlers.echo import register_echo
 from tgbot.handlers.user import register_user
+from tgbot.handlers.testing import register_test
+from tgbot.handlers.inline_mode import register_inline_mode
 from tgbot.middlewares.db import DbMiddleware
 
 logger = logging.getLogger(__name__)
@@ -27,7 +29,10 @@ def register_all_handlers(dp):
     register_admin(dp)
     register_user(dp)
 
-    register_echo(dp)
+    # register_test(dp)
+    register_inline_mode(dp)
+    # register_echo(dp)
+
 
 
 async def main():
@@ -42,9 +47,9 @@ async def main():
     bot = Bot(token=config.tg_bot.token, parse_mode='HTML')
     dp = Dispatcher(bot, storage=storage)
 
-    await dp.bot.set_my_commands([
-        types.BotCommand('start', 'Run bot'),
-    ])
+    # await dp.bot.set_my_commands([
+    #     types.BotCommand('start', 'Run bot'),
+    # ])
 
     bot['config'] = config
 
