@@ -9,6 +9,7 @@ class DbConfig:
     password: str
     user: str
     database: str
+    postgresuri: str
 
 
 @dataclass
@@ -46,7 +47,8 @@ def load_config(path: str = None):
             host=env.str('POSTGRES_HOST'),
             password=env.str('POSTGRES_PASSWORD'),
             user=env.str('POSTGRES_USER'),
-            database=env.str('DB_NAME')
+            database=env.str('DB_NAME'),
+            postgresuri=f"postgresql://{env.str('POSTGRES_USER')}:{env.str('POSTGRES_PASSWORD')}@{env.str('POSTGRES_HOST')}:5432/{env.str('POSTGRES_DB')}"
         ),
         misc=Miscellaneous()
     )

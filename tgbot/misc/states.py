@@ -1,6 +1,8 @@
 from aiogram.dispatcher.filters.state import StatesGroup, State
 
 
-class Test(StatesGroup):
-    q1 = State()
-    q2 = State()
+class AddPreset(StatesGroup):
+    from_enter = State()
+    to_enter = State()
+    enter_name = State()
+

@@ -7,6 +7,8 @@ services:
     stop_signal: SIGINT
     build:
       context: .
+    depends_on:
+      - db
     working_dir: "/usr/src/app/${BOT_NAME:-tg_bot}"
     volumes:
       - .:/usr/src/app/${BOT_NAME:-tg_bot}

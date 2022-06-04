@@ -5,14 +5,15 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.fsm_storage.redis import RedisStorage2
 
+from db.tgbot.database import create_db
 from tgbot.config import load_config
 from tgbot.filters.admin import AdminFilter
 from tgbot.handlers.admin import register_admin
 from tgbot.handlers.echo import register_echo
 from tgbot.handlers.user import register_user
-from tgbot.handlers.testing import register_test
-from tgbot.handlers.inline_mode import register_inline_mode
+from tgbot.handlers.add_preset import register_add_preset
 from tgbot.middlewares.db import DbMiddleware
+from db.tgbot.load_to_database import load_countries, load_cities
 
 logger = logging.getLogger(__name__)
 
@@ -29,10 +30,12 @@ def register_all_handlers(dp):
     register_admin(dp)
     register_user(dp)
 
-    # register_test(dp)
-    register_inline_mode(dp)
-    # register_echo(dp)
+    register_admin(dp)
 
+    register_add_preset(dp)
+    # register_test(dp)
+    # register_inline_mode(dp)
+    # register_echo(dp)
 
 
 async def main():
@@ -47,9 +50,9 @@ async def main():
     bot = Bot(token=config.tg_bot.token, parse_mode='HTML')
     dp = Dispatcher(bot, storage=storage)
 
-    # await dp.bot.set_my_commands([
-    #     types.BotCommand('start', 'Run bot'),
-    # ])
+    await dp.bot.set_my_commands([
+        types.BotCommand('start', 'Run bot'),
+    ])
 
     bot['config'] = config
 
@@ -57,7 +60,10 @@ async def main():
     register_all_filters(dp)
     register_all_handlers(dp)
 
-    # start
+    await create_db()
+    # await load_countries()
+    # await load_cities()
+
     try:
         await dp.start_polling()
     finally:
