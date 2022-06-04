@@ -146,7 +146,7 @@ async def send_to_insta(call: CallbackQuery, callback_data: dict):
         start_date += timedelta(days=1)
 
     # avia.prices_for_dates(origin)
-    # await call.message.answer(text='TRIP|' + str(list_tick[0]))
+    await call.message.answer(text='TRIP|' + str(list_tick[0]))
 
 
 # async def send_to_insta(message: types.Message, state: FSMContext):
