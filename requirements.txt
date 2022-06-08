@@ -8,3 +8,4 @@ gino
 aiogram_calendar
 instagrapi
 Pillow
+imgkit

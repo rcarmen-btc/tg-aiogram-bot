@@ -9,7 +9,7 @@ from db.tgbot.database import create_db
 from tgbot.config import load_config
 from tgbot.filters.admin import AdminFilter
 from tgbot.handlers.admin import register_admin
-from tgbot.handlers.echo import register_echo
+from tgbot.handlers.show_presets import register_show
 from tgbot.handlers.user import register_user
 from tgbot.handlers.add_preset import register_add_preset
 from tgbot.middlewares.db import DbMiddleware
@@ -30,6 +30,7 @@ def register_all_handlers(dp):
     register_admin(dp)
     register_user(dp)
 
+    register_show(dp)
     register_admin(dp)
 
     register_add_preset(dp)
