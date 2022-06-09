@@ -9,3 +9,4 @@ aiogram_calendar
 instagrapi
 Pillow
 imgkit
+googlemaps
